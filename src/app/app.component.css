@@ -1,0 +1,36 @@
+@font-face {
+  font-family: 'Lato';
+  src: local('Lato'),
+  local('Lato-Regular'),
+  url('../assets/fonts/Lato-Regular.ttf');
+}
+
+html {
+  height: 100%
+}
+
+body {
+  min-height: 100%;
+  font-family: Lato, sans-serif;
+  background-color: whitesmoke;
+}
+
+p, ul {
+  line-height: 1.75;
+}
+
+a {
+  color: #353a2e;
+}
+
+a:hover {
+  color: #515647;
+}
+
+#aLogout {
+  cursor: pointer;
+}
+
+.custom-card {
+  background-color: white;
+}
