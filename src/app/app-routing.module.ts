@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { ServicesComponent } from './services/services.component';
-import { InstallationsComponent } from './installations/installations.component';
-import { LoginComponent } from './login/login.component';
-import { SigninComponent } from './signin/signin.component';
-import { ReservationsComponent } from './reservations/reservations.component';
-import { IndexComponent } from './index/index.component';
+import {ServicesComponent} from './components/services/services.component';
+import {InstallationsComponent} from './components/installations/installations.component';
+import {LoginComponent} from './components/login/login.component';
+import {SigninComponent} from './components/signin/signin.component';
+import {ReservationsComponent} from './components/reservations/reservations.component';
+import {IndexComponent} from './components/index/index.component';
 
 
 const routes: Routes = [
