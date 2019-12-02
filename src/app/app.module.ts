@@ -15,6 +15,10 @@ import {SessionService} from './shared/services/session.service';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ReservationsService} from './shared/services/reservations.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatTabsModule} from '@angular/material';
+import {AuthGuardService} from './shared/services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -26,16 +30,19 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ReservationsComponent,
     NavbarComponent,
     FooterComponent,
-    IndexComponent
+    IndexComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule,
+    MatTabsModule
   ],
-  providers: [SessionService],
+  providers: [SessionService, ReservationsService, AuthGuardService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
