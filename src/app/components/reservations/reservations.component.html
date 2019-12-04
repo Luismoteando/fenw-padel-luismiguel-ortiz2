@@ -1,0 +1,100 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h3 class="text-center">¡Buenas, {{username}}!</h3>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Nueva reserva">
+          <div class="container mb-3">
+            <form>
+              <div class="form-group">
+                <label for="date">Fecha: </label>
+                <input (blur)="listDateReservations()" [(ngModel)]="date" class="form-control" id="date" name="date"
+                       type="date">
+              </div>
+            </form>
+            <!--            <p *ngFor='let reservation of dateReservationsList;'>
+                          Reserva #{{reservation.rsvId}}: Pista {{reservation.courtId}} reservada el {{reservation.rsvday}} a
+                          las {{reservation.rsvtime}}.
+                        </p>-->
+            <div *ngIf="date !== undefined" class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 my-3">
+                      <h3 class="text-center">
+                        Pista #1
+                      </h3>
+                      <div class="d-flex flex-wrap justify-content-center">
+                        <div *ngFor='let hour of hoursCourt1;'>
+                          <button (click)="reserve(1, hour)" class="btn btn-secondary btn-md m-1" type="button">
+                            {{hour}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 my-3">
+                      <h3 class="text-center">
+                        Pista #2
+                      </h3>
+                      <div class="d-flex flex-wrap justify-content-center">
+                        <div *ngFor='let hour of hoursCourt2;'>
+                          <button (click)="reserve(2, hour)" class="btn btn-secondary btn-md m-1" type="button">
+                            {{hour}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-6 my-3">
+                      <h3 class="text-center">
+                        Pista #3
+                      </h3>
+                      <div class="d-flex flex-wrap justify-content-center">
+                        <div *ngFor='let hour of hoursCourt3;'>
+                          <button (click)="reserve(3, hour)" class="btn btn-secondary btn-md m-1" type="button">
+                            {{hour}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6 my-3">
+                      <h3 class="text-center">
+                        Pista #4
+                      </h3>
+                      <div class="d-flex flex-wrap justify-content-center">
+                        <div *ngFor='let hour of hoursCourt4;'>
+                          <button (click)="reserve(4, hour)" class="btn btn-secondary btn-md m-1" type="button">
+                            {{hour}}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Historial de reservas">
+          <section class="timeline">
+            <div class="container">
+              <div *ngFor='let reservation of myReservationsList;' class="timeline-item">
+                <div class="timeline-img"></div>
+                <div class="timeline-content js--fadeInLeft">
+                  <div class="date">{{reservation.rsvday}}</div>
+                  <h2>Reserva #{{reservation.rsvId}}</h2>
+                  <p>Pista {{reservation.courtId}} reservada a las {{reservation.rsvtime}}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

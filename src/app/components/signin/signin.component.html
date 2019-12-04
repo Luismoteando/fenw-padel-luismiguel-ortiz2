@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center mt-5 py-5">
+  <div class="signin_card">
+    <div class="d-flex justify-content-center">
+      <div class="brand_logo_container">
+        <img alt="Logo" class="brand_logo" src="../../../assets/imgs/brand_upm.png">
+      </div>
+    </div>
+    <div class="d-flex justify-content-center form_container">
+      <form>
+        <div class="input-group required mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+          </div>
+          <input (blur)="checkExistsUser()" [(ngModel)]='newUsername' [required] class="form-control input_user"
+                 id="newUsername"
+                 name="newUsername" placeholder="Usuario" type="text">
+        </div>
+        <div class="input-group required mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text"><fa-icon [icon]="faEnvelope"></fa-icon></span>
+          </div>
+          <input [(ngModel)]='newEmail' [required] class="form-control input_user" id="newEmail"
+                 name="newEmail" placeholder="Correo electrónico" type="email">
+        </div>
+        <div class="input-group required mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+          </div>
+          <input [(ngModel)]='newPassword' [required] class="form-control input_pass" id="newPassword"
+                 name="newPassword" placeholder="Contraseña" type="password">
+        </div>
+        <div class="input-group required mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text"><fa-icon [icon]="faKey"></fa-icon></span>
+          </div>
+          <input (blur)="doublePasswordCheck()" [(ngModel)]='repeatPassword' [required]
+                 class="form-control input_pass" id="repeatPassword" name="repeatPassword"
+                 placeholder="Repita la contraseña" type="password">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-append">
+            <span class="input-group-text"><fa-icon [icon]="faBirthdayCake"></fa-icon></span>
+          </div>
+          <input [(ngModel)]='newBirthdate' class="form-control input_user" id="newBirthdate"
+                 name="newBirthdate" placeholder="Fecha de nacimiento" type="date">
+        </div>
+
+        <div *ngIf="showRequiredFieldsError" class="alert alert-danger mt-4" role="alert">Revise los campos
+          obligatorios.
+        </div>
+        <div *ngIf="showUsernameError" class="alert alert-danger mt-4" role="alert">El nombre de usuario ya existe.
+        </div>
+        <div *ngIf="showPasswordError" class="alert alert-danger mt-4" role="alert">Las contraseñas no coinciden.</div>
+        <div class="d-flex justify-content-center mt-1 signin_container">
+          <button (click)="signIn()" class="btn signin_btn" id="signin" name="button" type="button">Registrarse
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-4">
+      <div class="d-flex justify-content-center links">
+        ¿Ya tienes cuenta?<a class="ml-2" routerLink="/login">Inicia sesión</a>
+      </div>
+    </div>
+  </div>
+</div>

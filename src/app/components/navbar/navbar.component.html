@@ -1,0 +1,27 @@
+<nav class="navbar navbar-dark bg-dark position-relative navbar-expand-md">
+  <a class="navbar-brand" routerLink="/">
+    <img alt="" class="d-inline-block align-top mr-2" height="30" src="../../../assets/imgs/brand_upm.png" width="30">Pádel
+    UPM
+  </a>
+  <button class="navbar-toggler" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav" id="ulMenu">
+      <li class="nav-item"><a class="nav-link" routerLink="/">Inicio</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/servicios">Servicios</a></li>
+      <li class="nav-item"><a class="nav-link" routerLink="/instalaciones">Instalaciones</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto" id="ulSession">
+      <li class="divider" role="separator"></li>
+      <li *ngIf="!sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/signin">Regístrate</a>
+      </li>
+      <li *ngIf="!sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/login">Iniciar sesión</a>
+      </li>
+      <li *ngIf="sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/reservas">Mis reservas</a>
+      </li>
+      <li *ngIf="sessionService.isLogged()" class="nav-item"><a (click)="logout()" class="nav-link" routerLink="#">Cerrar
+        sesión</a></li>
+    </ul>
+  </div>
+</nav>
