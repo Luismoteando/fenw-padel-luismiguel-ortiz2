@@ -5,14 +5,17 @@ import {SessionService} from './session.service';
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private sessionService: SessionService, private router: Router) {
+  constructor(
+    private router: Router,
+    private sessionService: SessionService) {
   }
 
   canActivate() {
-    if (!this.sessionService.isLogged()) {
-      this.router.navigate(['/login']);
-      return false;
+    if (this.sessionService.isLoggedIn()) {
+      return true;
     }
-    return true;
+
+    this.router.navigate(['/login']);
+    return false;
   }
 }

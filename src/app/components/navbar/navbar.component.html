@@ -14,13 +14,15 @@
     </ul>
     <ul class="navbar-nav ml-auto" id="ulSession">
       <li class="divider" role="separator"></li>
-      <li *ngIf="!sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/signin">Regístrate</a>
+      <li *ngIf="!sessionService.isLoggedIn()" class="nav-item"><a class="nav-link" routerLink="/signin">Regístrate</a>
       </li>
-      <li *ngIf="!sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/login">Iniciar sesión</a>
+      <li *ngIf="!sessionService.isLoggedIn()" class="nav-item"><a class="nav-link" routerLink="/login">Iniciar
+        sesión</a>
       </li>
-      <li *ngIf="sessionService.isLogged()" class="nav-item"><a class="nav-link" routerLink="/reservas">Mis reservas</a>
+      <li *ngIf="sessionService.isLoggedIn()" class="nav-item"><a class="nav-link" routerLink="/reservas">Mis
+        reservas</a>
       </li>
-      <li *ngIf="sessionService.isLogged()" class="nav-item"><a (click)="logout()" class="nav-link" routerLink="#">Cerrar
+      <li *ngIf="sessionService.isLoggedIn()" class="nav-item"><a (click)="logout()" class="nav-link" routerLink="#">Cerrar
         sesión</a></li>
     </ul>
   </div>

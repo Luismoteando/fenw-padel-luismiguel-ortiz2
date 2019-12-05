@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   private faUser = faUser;
   private faKey = faKey;
-  private token: string;
   private showError: boolean;
   private username: string;
   private password: string;
@@ -37,8 +36,8 @@ export class LoginComponent implements OnInit {
     this.sessionService.logIn(this.user)
       .subscribe(
         (response) => {
-          this.token = response.headers.get('Authorization');
-          this.sessionService.setUserLoggedIn(this.username, this.token);
+          const token = response.headers.get('Authorization');
+          this.sessionService.setUserLoggedIn(this.username, token);
           this.location.replaceState('/reservas');
           this.router.navigate(['/reservas']);
         },

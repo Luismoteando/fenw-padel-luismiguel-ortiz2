@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Reservation} from '../../shared/models/reservation.model';
 import {SessionService} from '../../shared/services/session.service';
 import {ReservationsService} from '../../shared/services/reservations.service';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-reservations',
@@ -20,17 +22,23 @@ export class ReservationsComponent implements OnInit {
   private datetime: number;
   private date: string;
 
-  constructor(private sessionService: SessionService, private reservationsService: ReservationsService) {
+  constructor(
+    private router: Router,
+    private location: Location,
+    private sessionService: SessionService,
+    private reservationsService: ReservationsService) {
   }
 
   ngOnInit() {
-    this.username = this.sessionService.username;
+    this.username = this.sessionService.getUsername();
     this.listMyReservations();
   }
 
   private listDateReservations() {
     this.reservationsService.listDateReservations(new Date(this.date).getTime()).subscribe(
       (response) => {
+        const token = response.headers.get('Authorization');
+        this.sessionService.setToken(token);
         this.dateReservationsList = response.body as Reservation[];
         for (let i = 1; i < 5; i++) {
           this.availableHours(i);
@@ -45,6 +53,8 @@ export class ReservationsComponent implements OnInit {
   private listMyReservations() {
     this.reservationsService.listMyReserevations().subscribe(
       (response) => {
+        const token = response.headers.get('Authorization');
+        this.sessionService.setToken(token);
         this.myReservationsList = response.body as Reservation[];
       },
       (error) => {
@@ -101,12 +111,23 @@ export class ReservationsComponent implements OnInit {
       this.datetime = new Date((this.date + ' ' + rsvtime).replace(/-/g, '/')).getTime();
       this.reservationsService.reserve(courtId, this.datetime).subscribe(
         (response) => {
+          const token = response.headers.get('Authorization');
+          this.sessionService.setToken(token);
           this.listDateReservations();
           this.listMyReservations();
         },
         (error) => {
-          alert('⚠️ No se pudo realizar la reserva. Debe seleccionar fecha y hora posterior a la actual.');
-          console.log(error.toString());
+          if (error.status === 400) {
+            alert('⚠️ Debe seleccionar fecha y hora posterior a la actual.');
+          } else if (error.status === 401) {
+            alert('⚠️ Su sesión ha caducado. Vuelva a iniciar sesión.');
+            window.location.reload();
+          } else if (error.status === 409) {
+            alert('⚠️ Ha alcanzado el número máximo de reservas.');
+          } else if (error.status === 500) {
+            alert('⚠️ Ocurrió un error al realizar su reserva.');
+          }
+          console.log(error.message);
         }
       );
     }

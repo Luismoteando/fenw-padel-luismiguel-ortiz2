@@ -13,7 +13,7 @@ export class ReservationsService {
   }
 
   listDateReservations(date: number) {
-    const headers = new HttpHeaders({'Authorization': this.sessionService.token});
+    const headers = new HttpHeaders({Authorization: this.sessionService.getToken()});
     return this.http.get(this.baseurl + '/reservations/' + date,
       {
         headers,
@@ -22,7 +22,7 @@ export class ReservationsService {
   }
 
   listUserReservations(username: string) {
-    const headers = new HttpHeaders({'Authorization': this.sessionService.token});
+    const headers = new HttpHeaders({Authorization: this.sessionService.getToken()});
     return this.http.get(this.baseurl + '/reservations/' + username,
       {
         headers,
@@ -31,7 +31,7 @@ export class ReservationsService {
   }
 
   listMyReserevations() {
-    const headers = new HttpHeaders({'Authorization': this.sessionService.token});
+    const headers = new HttpHeaders({Authorization: this.sessionService.getToken()});
     return this.http.get(this.baseurl + '/reservations',
       {
         headers,
@@ -40,7 +40,7 @@ export class ReservationsService {
   }
 
   reserve(courtId: number, datetime: number) {
-    const headers = new HttpHeaders({'Authorization': this.sessionService.token, 'Content-Type': 'application/json'});
+    const headers = new HttpHeaders({Authorization: this.sessionService.getToken(), 'Content-Type': 'application/json'});
     return this.http.post(this.baseurl + '/reservations',
       {
         courtid: courtId,

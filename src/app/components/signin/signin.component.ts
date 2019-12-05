@@ -16,7 +16,6 @@ export class SigninComponent implements OnInit {
   private faEnvelope = faEnvelope;
   private faKey = faKey;
   private faBirthdayCake = faBirthdayCake;
-  private token: string;
   private showRequiredFieldsError: boolean;
   private showUsernameError: boolean;
   private showPasswordError: boolean;
@@ -48,8 +47,8 @@ export class SigninComponent implements OnInit {
     this.sessionService.signIn(this.newUser)
       .subscribe(
         (response) => {
-          this.token = response.headers.get('Authorization');
-          this.sessionService.setUserLoggedIn(this.newUsername, this.token);
+          const token = response.headers.get('Authorization');
+          this.sessionService.setUserLoggedIn(this.newUsername, token);
           this.location.replaceState('/reservas');
           this.router.navigate(['/reservas']);
         },

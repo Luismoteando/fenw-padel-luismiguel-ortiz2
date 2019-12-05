@@ -2,16 +2,35 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from '../models/user.model';
 
+export const TOKEN_NAME = 'token';
+export const USERNAME_NAME = 'user';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  username: string;
-  token: string;
   private baseurl = 'http://fenw.etsisi.upm.es:10000';
 
   constructor(private http: HttpClient) {
+  }
+
+  getToken(): string {
+    return localStorage.getItem(TOKEN_NAME);
+  }
+
+  setToken(token: string): void {
+    if (token) {
+      localStorage.setItem(TOKEN_NAME, token);
+    }
+  }
+
+  getUsername(): string {
+    return localStorage.getItem(USERNAME_NAME);
+  }
+
+  setUsername(username: string) {
+    localStorage.setItem(USERNAME_NAME, username);
   }
 
   logIn(user: User) {
@@ -45,30 +64,20 @@ export class SessionService {
   }
 
   setUserLoggedIn(username: string, token: string) {
-    this.username = username;
-    this.token = token;
-    localStorage.setItem('username', this.username);
-    localStorage.setItem('token', this.token);
+    this.setToken(token);
+    this.setUsername(username);
   }
 
   removeUserLoggedIn() {
-    this.username = '';
-    this.token = '';
-    localStorage.setItem('username', this.username);
-    localStorage.setItem('token', this.token);
+    localStorage.clear();
   }
 
-  isLogged(): boolean {
-    const username = localStorage.getItem('username');
-    const token = localStorage.getItem('token');
-    if (token) {
-      this.token = token;
-      if (username) {
-        this.username = username;
-      }
-      return true;
-    } else {
+  isLoggedIn(): boolean {
+    const token = this.getToken();
+    if (!token) {
       return false;
+    } else {
+      return true;
     }
   }
 }
